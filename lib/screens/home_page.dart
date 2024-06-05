@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controller/destination_controller.dart';
+import 'destiantion/category_button.dart';
+import 'destiantion/destination_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,6 +12,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     DestinationController destinationController = Get.find();
     print(destinationController.destinations?.length);
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,9 +75,24 @@ class HomePage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CategoryButton(icon: Icons.hotel, label: 'Hotels'),
-                          CategoryButton(icon: Icons.flight, label: 'Flights'),
-                          CategoryButton(icon: Icons.category, label: 'All'),
+                          CategoryButton(
+                              icon: Icons.hotel,
+                              label: 'Hotels',
+                              color: Colors.red,
+                              backgroundColor: Colors.red[50],
+                              onTap: () {}),
+                          CategoryButton(
+                              icon: Icons.flight,
+                              label: 'Flights',
+                              color: Colors.blue,
+                              backgroundColor: Colors.blue[50],
+                              onTap: () {}),
+                          CategoryButton(
+                              icon: Icons.category,
+                              label: 'All',
+                              color: Colors.green,
+                              backgroundColor: Colors.green[50],
+                              onTap: () {}),
                         ],
                       ),
                     ],
@@ -97,127 +115,15 @@ class HomePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
-              children: [
-                DestinationCard(
-                  imageUrl:
-                      'https://th.bing.com/th/id/OIP._PPy4GtYNG5lLWMs9-edPwHaE8?rs=1&pid=ImgDetMain',
-                  location: 'Hoi An',
-                  rating: 4.0,
-                ),
-                DestinationCard(
-                  imageUrl:
-                      'https://th.bing.com/th/id/OIP._PPy4GtYNG5lLWMs9-edPwHaE8?rs=1&pid=ImgDetMain',
-                  location: 'Sai Gon',
-                  rating: 4.5,
-                ),
-                DestinationCard(
-                  imageUrl:
-                      'https://th.bing.com/th/id/OIP._PPy4GtYNG5lLWMs9-edPwHaE8?rs=1&pid=ImgDetMain',
-                  location: 'Other Place',
-                  rating: 4.7,
-                ),
-              ],
+              children: destinationController.destinations!
+                  .map((e) => DestinationCard(
+                        imageUrl: e.image!,
+                        location: e.title!,
+                        rating: e.rate!,
+                        favorite: e.favorite!,
+                      ))
+                  .toList(),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CategoryButton extends StatelessWidget {
-  final IconData icon;
-  final String label;
-
-  const CategoryButton({
-    super.key,
-    required this.icon,
-    required this.label,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 70,
-          width: 100,
-          decoration: BoxDecoration(
-            color: Colors.blueGrey,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Icon(
-            icon,
-            color: Colors.deepPurple,
-          ),
-        ),
-        SizedBox(height: 8),
-        Text(label),
-      ],
-    );
-  }
-}
-
-class DestinationCard extends StatelessWidget {
-  final String imageUrl;
-  final String location;
-  final double rating;
-
-  const DestinationCard({
-    Key? key,
-    required this.imageUrl,
-    required this.location,
-    required this.rating,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 16),
-      child: Row(
-        children: [
-          Container(
-            width: 100,
-            height: 100,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              image: DecorationImage(
-                image: NetworkImage(imageUrl),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  location,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 8),
-                Row(
-                  children: [
-                    Icon(Icons.star, color: Colors.yellow, size: 16),
-                    SizedBox(width: 4),
-                    Text(
-                      '$rating',
-                      style: TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          IconButton(
-            icon: Icon(Icons.favorite_border, color: Colors.red),
-            onPressed: () {},
           ),
         ],
       ),
