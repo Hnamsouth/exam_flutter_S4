@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "847227291097",
+    "project_id": "fir-cloud-firestore-93a23",
+    "storage_bucket": "fir-cloud-firestore-93a23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847227291097:android:1ccb974681e64243d805c8",
+        "android_client_info": {
+          "package_name": "com.exams4.exam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-2ps-onjywUTw0CIIXYcthmKSArFFybc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
