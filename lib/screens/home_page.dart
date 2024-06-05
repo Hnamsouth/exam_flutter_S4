@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../controller/destination_controller.dart';
@@ -14,27 +16,33 @@ class HomePage extends StatelessWidget {
     print(destinationController.destinations?.length);
 
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      clipBehavior: Clip.none,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Stack(
-            children: [
-              Container(
-                height: 250,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                  ),
-                  gradient: LinearGradient(
-                    colors: [Colors.deepPurple, Colors.purple],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
+          SizedBox(
+            height: 335,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  height: 200,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                    ),
+                    gradient: LinearGradient(
+                      colors: [Colors.deepPurple, Colors.purple],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
                   ),
                 ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 60),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 16, right: 16, top: 80, bottom: 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
@@ -57,11 +65,11 @@ class HomePage extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       Container(
-                        height: 60,
+                        height: 50,
                         child: TextField(
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.white,
+                            fillColor: Colors.grey[200],
                             hintText: 'Search your destination',
                             prefixIcon: Icon(Icons.search),
                             border: OutlineInputBorder(
@@ -97,11 +105,10 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
-              ),
-            ],
+                )
+              ],
+            ),
           ),
-          const SizedBox(height: 60),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Text(
